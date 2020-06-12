@@ -2,22 +2,20 @@
   <div class="hello">
     <v-stage :config="configKonva">
       <v-layer>
-        <v-arc :config="configArc[0]"></v-arc>
-        <v-arc :config="configArc[1]"></v-arc>
-        <v-arc :config="configArc[2]"></v-arc>
-        
+        <v-rect :config="configSecRect"></v-rect>   
+        <v-rect :config="configMinRect"></v-rect>  
+        <v-rect :config="configHourRect"></v-rect> 
         <v-rect :config="configEndMarker"></v-rect> 
       </v-layer>
     </v-stage>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Abstract',
   props: {
-   
+    
   },
   data () {
     return {
@@ -25,44 +23,37 @@ export default {
         width: 800,
         height: 800
       },
-      configArc: [{
-        id: 'seconds',
-        x: 400,
-        y: 400,
-        innerRadius: 290,
-        outerRadius: 300,
-        angle: '',
-        fill: '#66e9ae',
-        rotation: -90
-      },
-      {
-        id: 'minutes',
-        x: 400,
-        y: 400,
-        innerRadius: 235,
-        outerRadius: 255,
-        angle: '',
-        fill: '#42b983',
-        rotation: -90
-      },
-      {
-        id: 'hours',
-        x: 400,
-        y: 400,
-        innerRadius: 170,
-        outerRadius: 200,
-        angle: '',
-        fill: '#135537',
-        rotation: -90
-      }],
-      configEndMarker: {
-        x: 395,
+      configSecRect: {
+        x: 430,
         y: 100,
         width: 10,
-        height: 130,
+        height: 10,
+        fill: '#66e9ae'
+      },
+      configMinRect: {
+        x: 400,
+        y: 100,
+        width: 10,
+        height: 10,
+        fill: '#42b983'
+      },
+      configHourRect: {
+        x: 350,
+        y: 100,
+        width: 30,
+        height:30,
+        fill: '#135537'
+      },
+      configEndMarker: {
+        x: 350,
+        y: 700,
+        width: 90,
+        height:10,
         fill: '#122b1f'
       },
-      show: true
+      secondCount: '',
+      minuteCount: '',
+      hourCount: ''
     }
   },
   created () {
@@ -85,9 +76,9 @@ export default {
         seconds = 60
       }
       // Set Konva Arc angles
-      this.configArc[0].angle = (seconds * 6)
-      this.configArc[1].angle = (minutes * 6)
-      this.configArc[2].angle = (hours * 30)
+       this.configSecRect.height = seconds * 10
+       this.configMinRect.height = minutes * 10
+       this.configHourRect.height = hours * 50
     }
   }
 
@@ -115,5 +106,4 @@ li {
 a {
   color: #66e9ae;
 }
-
 </style>
